@@ -22,4 +22,5 @@ This video clip shows how it looks with the Material and Enviro fader applied:
 
 [![](https://img.youtube.com/vi/A6mdaOySVQM/0.jpg)](https://www.youtube.com/watch?v=A6mdaOySVQM)
 
-If you need a custom fader, I suggest to check out EnviroTimeFader.cs, the implementation should be straightforward.
+If you need a custom fader, I suggest to check out EnviroTimeFader.cs, the implementation should be straightforward. 
+Please also note that for the Enviro fader to work you need to have the ENVIRO scripting define symbol. I just added it so that you don't get compiler errors in case you don't have Enviro.
