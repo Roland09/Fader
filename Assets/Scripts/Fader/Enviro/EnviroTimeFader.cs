@@ -7,6 +7,9 @@ namespace Rowlan
 {
 	/// <summary>
 	/// Fade Enviro's time in and out
+	/// 
+	/// Important: Using Enviro requires this scripting symbol to be defined: ENVIRO. Or alternatively adjust the #if codeblock in <see cref="CustomFader"/>.
+	/// 
 	/// </summary>
 	public class EnviroTimeFader : MonoBehaviour
 	{
