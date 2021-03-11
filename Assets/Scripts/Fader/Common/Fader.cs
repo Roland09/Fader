@@ -5,12 +5,24 @@ using static Rowlan.FadeConst;
 
 namespace Rowlan
 {
-    public abstract class Fader
+	/// <summary>
+	/// Interpolate a value within a specified duration and apply it to the implemented <see cref="ApplyFade"/> method.
+	/// </summary>
+	public abstract class Fader
     {
         private Coroutine currentFadeCoroutine = null;
 		private float duration = 0;
 		private Ease ease;
 
+		/// <summary>
+		/// Stop currently running fading and start a new one depending on the specified parameters
+		/// </summary>
+		/// <param name="monoBehaviour">Required for the Coroutine invocations</param>
+		/// <param name="fadeDirection"></param>
+		/// <param name="duration"></param>
+		/// <param name="ease"></param>
+		/// <param name="minimumValue"></param>
+		/// <param name="maximumValue"></param>
 		public void Start(MonoBehaviour monoBehaviour, FadeDirection fadeDirection, float duration, Ease ease, float minimumValue, float maximumValue) {
 
 			this.duration = duration;
@@ -51,6 +63,10 @@ namespace Rowlan
 			ApplyFade(endValue);
 		}
 
+		/// <summary>
+		/// This method is invoked for the time of the fade duration and gets the interpolated value applied
+		/// </summary>
+		/// <param name="value"></param>
 		public abstract void ApplyFade(float value);
 	}
 }

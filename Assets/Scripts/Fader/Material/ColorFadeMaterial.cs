@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Rowlan
 {
+	/// <summary>
+	/// Material color fading handler.
+	/// </summary>
 	public class ColorFadeMaterial : BaseFadeMaterial
 	{
 		public ColorFadeMaterial(Renderer renderer, string propertyNameID) : base(renderer, propertyNameID)

@@ -8,6 +8,7 @@ namespace Rowlan
 {
 	/// <summary>
 	/// Fade a material property value in and out with specified easing functions.
+	/// 
 	/// Supported property types:
 	/// + Float
 	/// + Color
@@ -89,6 +90,13 @@ namespace Rowlan
 				this.fadeMaterials = GetFadeMaterials(sceneGameObject, propertyType, propertyNameID);
 			}
 
+			/// <summary>
+			/// Collect all fade materials depending on the property type and name id
+			/// </summary>
+			/// <param name="sceneGameObject"></param>
+			/// <param name="propertyType"></param>
+			/// <param name="propertyNameID"></param>
+			/// <returns></returns>
 			private List<BaseFadeMaterial> GetFadeMaterials(GameObject sceneGameObject, MaterialPropertyType propertyType, string propertyNameID)
 			{
 				List<BaseFadeMaterial> fadeMaterials = new List<BaseFadeMaterial>();
@@ -132,6 +140,5 @@ namespace Rowlan
 		}
 
 		#endregion Fade Logic
-
 	}
 }

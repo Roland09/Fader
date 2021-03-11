@@ -6,6 +6,9 @@ using static Rowlan.FadeConst;
 
 namespace Rowlan
 {
+	/// <summary>
+	/// Various enums and types used for the fading parameters
+	/// </summary>
 	public class FadeConst
 	{
 		public enum FadeDirection
@@ -28,6 +31,9 @@ namespace Rowlan
 		}
 	}
 
+	/// <summary>
+	/// Perform the Lerp algorithm depending on the selected ease type
+	/// </summary>
 	public static class EaseExtensions
 	{
 		public static float Lerp(this Ease ease, float start, float end, float value)

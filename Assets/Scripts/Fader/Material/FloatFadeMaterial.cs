@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Rowlan
 {
+	/// <summary>
+	/// Material float value fading handler.
+	/// </summary>
 	public class FloatFadeMaterial : BaseFadeMaterial
 	{
 		public FloatFadeMaterial(Renderer renderer, string propertyNameID) : base(renderer, propertyNameID)

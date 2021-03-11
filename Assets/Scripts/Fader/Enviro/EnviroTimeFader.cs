@@ -58,7 +58,6 @@ namespace Rowlan
 
 					// toggle fade direction
 					fadeDirection = fadeDirection == FadeDirection.In ? FadeDirection.Out : FadeDirection.In;
-
 				}
 			}
 		}
@@ -70,8 +69,12 @@ namespace Rowlan
 		{
 			public override void ApplyFade(float value)
 			{
+#if ENVIRO
 				//EnviroSkyMgr.instance.SetTimeOfDay(EnviroSkyMgr.instance.GetUniversalTimeOfDay() + value);
 				EnviroSkyMgr.instance.SetTimeOfDay(value);
+#else
+				Debug.LogError("Using Enviro requires this scripting symbol to be defined: ENVIRO");
+#endif
 			}
 		}
 
