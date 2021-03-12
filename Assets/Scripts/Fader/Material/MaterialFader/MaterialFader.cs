@@ -33,10 +33,10 @@ namespace Rowlan
 		public float minimumValue = 0f;
 
 		[Tooltip("The maximum hour offset. Note that if you want from midday to 3 hours past midnight, you should use e. g. from 12 to 27")]
-		public float maximumValue = 12f;
+		public float maximumValue = 1f;
 
 		[Tooltip("The fade duration in seconds")]
-		public float duration = 5f;
+		public float duration = 2f;
 
 		[Tooltip("The easing meachinsm")]
 		public Ease ease = Ease.Linear;
