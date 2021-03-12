@@ -13,11 +13,8 @@ namespace Rowlan
 	/// + Float
 	/// + Color
 	/// 
-	/// Please note that there's also the option to Lerp between materials in Unity:
-	/// https://docs.unity3d.com/ScriptReference/Material.Lerp.html
-	/// 
 	/// </summary>
-	public class MaterialFader : MonoBehaviour
+	public class MaterialPropertyFader : MonoBehaviour
 	{
 		#region Public Variables
 		[Header("GameObject")]
