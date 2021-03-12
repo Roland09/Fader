@@ -6,27 +6,28 @@ using static Rowlan.FadeConst;
 namespace Rowlan
 {
 	/// <summary>
-	/// Example about how to fade Enviro's time in and out
-	/// 
-	/// Important: Using Enviro requires this scripting symbol to be defined: ENVIRO. Or alternatively adjust the #if codeblock in <see cref="CustomFader"/>.
-	/// 
+	/// Example about how to fade Aura 2's fog density
 	/// </summary>
-	public class EnviroTimeFader : MonoBehaviour
+	public class Aura2Fader : MonoBehaviour
 	{
-#if ENVIRO
+#if AURA_IN_PROJECT
 
 		#region Public Variables
 
+		[Header("Aura")]
+
+		public Aura2API.AuraVolume auraVolume;
+
 		[Header( "Fade")]
 
-		[Tooltip("The minimum hour offset. Note that if you want from midday to 3 hours past midnight, you should use e. g. from 12 to 27")]
-		public float minimumValue = 0f;
+		[Tooltip("The minimum fog density")]
+		public float minimumValue = -2f;
 
-		[Tooltip("The maximum hour offset. Note that if you want from midday to 3 hours past midnight, you should use e. g. from 12 to 27")]
-		public float maximumValue = 12f;
+		[Tooltip("The maximum fog density")]
+		public float maximumValue = 5f;
 
 		[Tooltip("The fade duration in seconds")]
-		public float duration = 5f;
+		public float duration = 2f;
 
 		[Tooltip("The easing meachinsm")]
 		public Ease ease = Ease.Linear;
@@ -47,8 +48,7 @@ namespace Rowlan
 		#region Initialization
 		void Start()
 		{
-
-			fader = new CustomFader();
+			fader = new CustomFader(auraVolume);
 		}
 		#endregion Initialization
 
@@ -72,17 +72,20 @@ namespace Rowlan
 
 		public class CustomFader : Fader
 		{
+			Aura2API.AuraVolume auraVolume;
+
+			public CustomFader(Aura2API.AuraVolume auraVolume) {
+				this.auraVolume = auraVolume;
+			}
+
 			public override void ApplyFade(float value)
 			{
-
-				//EnviroSkyMgr.instance.SetTimeOfDay(EnviroSkyMgr.instance.GetUniversalTimeOfDay() + value);
-				EnviroSkyMgr.instance.SetTimeOfDay(value);
+				auraVolume.densityInjection.strength = value;
 			}
 		}
 
 		#endregion Fade Logic
 
 #endif
-
 	}
 }
