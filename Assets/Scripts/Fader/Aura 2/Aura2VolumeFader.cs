@@ -8,7 +8,7 @@ namespace Rowlan
 	/// <summary>
 	/// Example about how to fade Aura 2's fog density
 	/// </summary>
-	public class Aura2Fader : MonoBehaviour
+	public class Aura2VolumeFader : MonoBehaviour
 	{
 #if AURA_IN_PROJECT
 
