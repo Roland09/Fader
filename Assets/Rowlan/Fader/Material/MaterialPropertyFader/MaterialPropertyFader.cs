@@ -17,9 +17,9 @@ namespace Rowlan.Fader
 	public class MaterialPropertyFader : MonoBehaviour
 	{
 		#region Public Variables
-		[Header("GameObject")]
+		[Header("GameObjects")]
 
-		public GameObject sceneGameObject;
+		public List<GameObject> sceneGameObjects = new List<GameObject>(new GameObject[1]);
 
 		[Header("Material")]
 
@@ -55,7 +55,7 @@ namespace Rowlan.Fader
 		#region Initialization
 		void Start()
 		{
-			fader = new CustomFader(sceneGameObject, propertyType, propertyNameID);
+			fader = new CustomFader(sceneGameObjects, propertyType, propertyNameID);
 		}
 		
 		#endregion Initialization
@@ -83,8 +83,8 @@ namespace Rowlan.Fader
 		{
 			private readonly List<BaseFadeMaterial> fadeMaterials;
 
-			public CustomFader(GameObject sceneGameObject, MaterialPropertyType propertyType, string propertyNameID) {
-				this.fadeMaterials = GetFadeMaterials(sceneGameObject, propertyType, propertyNameID);
+			public CustomFader(List<GameObject> sceneGameObjects, MaterialPropertyType propertyType, string propertyNameID) {
+				this.fadeMaterials = GetFadeMaterials(sceneGameObjects, propertyType, propertyNameID);
 			}
 
 			/// <summary>
@@ -94,29 +94,32 @@ namespace Rowlan.Fader
 			/// <param name="propertyType"></param>
 			/// <param name="propertyNameID"></param>
 			/// <returns></returns>
-			private List<BaseFadeMaterial> GetFadeMaterials(GameObject sceneGameObject, MaterialPropertyType propertyType, string propertyNameID)
+			private List<BaseFadeMaterial> GetFadeMaterials(List<GameObject> sceneGameObjects, MaterialPropertyType propertyType, string propertyNameID)
 			{
 				List<BaseFadeMaterial> fadeMaterials = new List<BaseFadeMaterial>();
 
-				Renderer[] rendererChildren = sceneGameObject.GetComponentsInChildren<Renderer>();
-
-				foreach (Renderer renderer in rendererChildren)
+				foreach (GameObject sceneGameObject in sceneGameObjects)
 				{
-					BaseFadeMaterial fadeMaterial = null;
+					Renderer[] rendererChildren = sceneGameObject.GetComponentsInChildren<Renderer>();
 
-					switch (propertyType)
+					foreach (Renderer renderer in rendererChildren)
 					{
-						case MaterialPropertyType.Float:
-							fadeMaterial = new FloatFadeMaterial(renderer, propertyNameID);
-							break;
-						case MaterialPropertyType.Color:
-							fadeMaterial = new ColorFadeMaterial(renderer, propertyNameID);
-							break;
-					}
+						BaseFadeMaterial fadeMaterial = null;
 
-					if (fadeMaterial.IsValid())
-					{
-						fadeMaterials.Add(fadeMaterial);
+						switch (propertyType)
+						{
+							case MaterialPropertyType.Float:
+								fadeMaterial = new FloatFadeMaterial(renderer, propertyNameID);
+								break;
+							case MaterialPropertyType.Color:
+								fadeMaterial = new ColorFadeMaterial(renderer, propertyNameID);
+								break;
+						}
+
+						if (fadeMaterial.IsValid())
+						{
+							fadeMaterials.Add(fadeMaterial);
+						}
 					}
 				}
 
