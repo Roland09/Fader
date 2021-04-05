@@ -2,9 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Rowlan.FadeConst;
+using static Rowlan.Fader.FadeConst;
 
-namespace Rowlan
+namespace Rowlan.Fader
 {
 	/// <summary>
 	/// Various enums and types used for the fading parameters

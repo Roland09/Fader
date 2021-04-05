@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Rowlan.FadeConst;
+using static Rowlan.Fader.FadeConst;
 
-namespace Rowlan
+namespace Rowlan.Fader
 {
 	/// <summary>
 	/// Interpolate a value within a specified duration and apply it to the implemented <see cref="ApplyFade"/> method.

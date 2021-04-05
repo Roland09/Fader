@@ -1,14 +1,14 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using static Rowlan.FadeConst;
+using static Rowlan.Fader.FadeConst;
 
-namespace Rowlan
+namespace Rowlan.Fader
 {
 	/// <summary>
-	/// Example about how to fade Aura 2's fog density
+	/// Example about how to fade Aura 2's extinction
 	/// </summary>
-	public class Aura2VolumeFader : MonoBehaviour
+	public class Aura2CameraFader : MonoBehaviour
 	{
 #if AURA_IN_PROJECT
 
@@ -16,7 +16,7 @@ namespace Rowlan
 
 		[Header("Aura")]
 
-		public Aura2API.AuraVolume auraVolume;
+		public Aura2API.AuraCamera auraCamera;
 
 		[Header( "Fade")]
 
@@ -48,7 +48,7 @@ namespace Rowlan
 		#region Initialization
 		void Start()
 		{
-			fader = new CustomFader(auraVolume);
+			fader = new CustomFader(auraCamera);
 		}
 		#endregion Initialization
 
@@ -72,15 +72,15 @@ namespace Rowlan
 
 		public class CustomFader : Fader
 		{
-			Aura2API.AuraVolume auraVolume;
+			Aura2API.AuraCamera auraCamera;
 
-			public CustomFader(Aura2API.AuraVolume auraVolume) {
-				this.auraVolume = auraVolume;
+			public CustomFader(Aura2API.AuraCamera auraCamera) {
+				this.auraCamera = auraCamera;
 			}
 
 			public override void ApplyFade(float value)
 			{
-				auraVolume.densityInjection.strength = value;
+				auraCamera.frustumSettings.baseSettings.extinction = value;
 			}
 		}
 
