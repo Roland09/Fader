@@ -14,7 +14,7 @@ namespace Rowlan.Fader
 	/// + Color
 	/// 
 	/// </summary>
-	public class MaterialPropertyFader : MonoBehaviour
+	public class SingleMaterialPropertyFader : MonoBehaviour
 	{
 		#region Public Variables
 		[Header("GameObjects")]
