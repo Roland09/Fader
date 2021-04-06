@@ -6,15 +6,15 @@ namespace Rowlan.Fader
 {
 	public abstract class BaseFadeMaterial
 	{
-		protected string propertyNameID;
+		protected FadeSettings propertyFadeSettings;
 
 		protected Renderer renderer;
 		protected List<MaterialBlockBase> materialBlocks = new List<MaterialBlockBase>();
 
-		public BaseFadeMaterial(Renderer renderer, string propertyNameID)
+		public BaseFadeMaterial(Renderer renderer, FadeSettings propertyFadeSettings)
 		{
 			this.renderer = renderer;
-			this.propertyNameID = propertyNameID;
+			this.propertyFadeSettings = propertyFadeSettings;
 
 			RegisterMaterials();
 		}
@@ -30,7 +30,7 @@ namespace Rowlan.Fader
 			{
 				Material material = materials[i];
 
-				if (!material.HasProperty(propertyNameID))
+				if (!material.HasProperty(propertyFadeSettings.propertyNameID))
 					continue;
 
 				MaterialBlockBase materialBlock = CreateMaterialBlock(i, material);
@@ -57,10 +57,10 @@ namespace Rowlan.Fader
 		public abstract MaterialBlockBase CreateMaterialBlock(int index, Material material);
 
 		/// <summary>
-		/// Process the material data containers and set the fade value.
+		/// Process the material data containers and set the fade percentage.
 		/// </summary>
-		/// <param name="value"></param>
-		public abstract void UpdateMaterials(float value);
+		/// <param name="percentage">An interpolated value of [0,1] range which spans the duration</param>
+		public abstract void UpdateMaterials(float percentage);
 
 		/// <summary>
 		/// Material data container class per supported material. Supported materials are the ones which contain the given property name id

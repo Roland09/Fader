@@ -20,17 +20,11 @@ namespace Rowlan.Fader
 
 		[Header( "Fade")]
 
-		[Tooltip("The minimum fog density")]
-		public float minimumValue = -2f;
-
-		[Tooltip("The maximum fog density")]
-		public float maximumValue = 5f;
+		[Tooltip("The minimum and the maximum fog density")]
+		public FadeSettings propertyFadeSettings = new FadeSettings( -2f, 5f);
 
 		[Tooltip("The fade duration in seconds")]
 		public float duration = 2f;
-
-		[Tooltip("The easing meachinsm")]
-		public Ease ease = Ease.Linear;
 
 		[Header("Input")]
 
@@ -48,7 +42,7 @@ namespace Rowlan.Fader
 		#region Initialization
 		void Start()
 		{
-			fader = new CustomFader(auraVolume);
+			fader = new CustomFader(auraVolume, propertyFadeSettings);
 		}
 		#endregion Initialization
 
@@ -59,7 +53,7 @@ namespace Rowlan.Fader
 			{
 				if (Input.GetKeyDown(toggleKeyCode))
 				{
-					fader.Start(this, fadeDirection, duration, ease, minimumValue, maximumValue);
+					fader.Start(this, fadeDirection, duration);
 
 					// toggle fade direction
 					fadeDirection = fadeDirection == FadeDirection.In ? FadeDirection.Out : FadeDirection.In;
@@ -72,15 +66,19 @@ namespace Rowlan.Fader
 
 		public class CustomFader : Fader
 		{
+			FadeSettings propertyFadeSettings;
 			Aura2API.AuraVolume auraVolume;
 
-			public CustomFader(Aura2API.AuraVolume auraVolume) {
+			public CustomFader(Aura2API.AuraVolume auraVolume, FadeSettings propertyFadeSettings) {
 				this.auraVolume = auraVolume;
+				this.propertyFadeSettings = propertyFadeSettings;
 			}
 
-			public override void ApplyFade(float value)
+			public override void ApplyFade(float percentage)
 			{
-				auraVolume.densityInjection.strength = value;
+				float interpolatedValue = propertyFadeSettings.ease.Lerp(propertyFadeSettings.minimumValue, propertyFadeSettings.maximumValue, percentage);
+
+				auraVolume.densityInjection.strength = interpolatedValue;
 			}
 		}
 

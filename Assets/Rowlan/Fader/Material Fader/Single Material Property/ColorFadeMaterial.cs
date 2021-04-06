@@ -9,24 +9,26 @@ namespace Rowlan.Fader
 	/// </summary>
 	public class ColorFadeMaterial : BaseFadeMaterial
 	{
-		public ColorFadeMaterial(Renderer renderer, string propertyNameID) : base(renderer, propertyNameID)
+		public ColorFadeMaterial(Renderer renderer, FadeSettings propertyFadeSettings) : base(renderer, propertyFadeSettings)
 		{
 		}
 
 		public override MaterialBlockBase CreateMaterialBlock(int index, Material material)
 		{
-			ColorMaterialBlock data = new ColorMaterialBlock(index, material.GetColor(propertyNameID));
+			ColorMaterialBlock data = new ColorMaterialBlock(index, material.GetColor(propertyFadeSettings.propertyNameID));
 
 			return data;
 		}
 
-		public override void UpdateMaterials(float value)
+		public override void UpdateMaterials(float percentage)
 		{
 			foreach (ColorMaterialBlock materialBlock in materialBlocks)
 			{
-				Color color = materialBlock.color * value; // note about gamma: for gamma you could use baseColor * Mathf.LinearToGammaSpace( value)
+				float interpolatedValue = propertyFadeSettings.ease.Lerp(propertyFadeSettings.minimumValue, propertyFadeSettings.maximumValue, percentage);
 
-				materialBlock.propertyBlock.SetColor(propertyNameID, color);
+				Color color = materialBlock.initialColor * interpolatedValue; // note about gamma: for gamma you could use baseColor * Mathf.LinearToGammaSpace( value)
+
+				materialBlock.propertyBlock.SetColor(propertyFadeSettings.propertyNameID, color);
 
 				renderer.SetPropertyBlock(materialBlock.propertyBlock, materialBlock.index);
 			}
@@ -39,11 +41,11 @@ namespace Rowlan.Fader
 			/// <summary>
 			/// The initial color of the material property
 			/// </summary>
-			public Color color;
+			public Color initialColor;
 
-			public ColorMaterialBlock(int index, Color color) : base(index)
+			public ColorMaterialBlock(int index, Color initialColor) : base(index)
 			{
-				this.color = color;
+				this.initialColor = initialColor;
 			}
 		}
 	}

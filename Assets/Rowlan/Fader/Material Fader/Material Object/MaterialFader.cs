@@ -69,7 +69,7 @@ namespace Rowlan.Fader
 			{
 				if (Input.GetKeyDown(toggleKeyCode))
 				{
-					fader.Start(this, fadeDirection, duration, ease, minimumValue, maximumValue);
+					fader.Start(this, fadeDirection, duration);
 
 					// toggle fade direction
 					fadeDirection = fadeDirection == FadeDirection.In ? FadeDirection.Out : FadeDirection.In;
@@ -93,9 +93,9 @@ namespace Rowlan.Fader
 				this.material2 = material2;
 			}
 
-			public override void ApplyFade(float value)
+			public override void ApplyFade(float percentage)
 			{
-				renderer.material.Lerp(material1, material2, value);
+				renderer.material.Lerp(material1, material2, percentage);
 			}
 		}
 

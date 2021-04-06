@@ -216,7 +216,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 113772296}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0.737, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2079810669}
@@ -317,12 +317,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneGameObjects:
   - {fileID: 1445958946}
-  propertyType: 1
-  propertyNameID: _EmissionColor
-  minimumValue: 1
-  maximumValue: 0
+  propertyFadeSettings:
+    propertyType: 1
+    propertyNameID: _EmissionColor
+    minimumValue: 0
+    maximumValue: 1
+    ease: 0
   duration: 2
-  ease: 0
   toggleKeyCode: 32
 --- !u!4 &342609597
 Transform:
@@ -352,12 +353,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneGameObjects:
   - {fileID: 113772296}
-  propertyType: 0
-  propertyNameID: _Metallic
-  minimumValue: 0
-  maximumValue: 1
-  duration: 1
-  ease: 0
+  propertyFadeSettings:
+    propertyType: 0
+    propertyNameID: _Metallic
+    minimumValue: 0
+    maximumValue: 1
+    ease: 0
+  duration: 2
   toggleKeyCode: 32
 --- !u!1 &414104291
 GameObject:
@@ -667,7 +669,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 737395475}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1, y: 0.5, z: 0}
+  m_LocalPosition: {x: -2.147, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1234158370}

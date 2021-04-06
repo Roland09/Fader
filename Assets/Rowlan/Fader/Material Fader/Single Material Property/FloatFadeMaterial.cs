@@ -9,22 +9,25 @@ namespace Rowlan.Fader
 	/// </summary>
 	public class FloatFadeMaterial : BaseFadeMaterial
 	{
-		public FloatFadeMaterial(Renderer renderer, string propertyNameID) : base(renderer, propertyNameID)
+		public FloatFadeMaterial(Renderer renderer, FadeSettings propertyFadeSettings) : base(renderer, propertyFadeSettings)
 		{
 		}
 
 		public override MaterialBlockBase CreateMaterialBlock(int index, Material material)
 		{
-			FloatMaterialBlock data = new FloatMaterialBlock(index, material.GetFloat(propertyNameID));
+			FloatMaterialBlock data = new FloatMaterialBlock(index, material.GetFloat(propertyFadeSettings.propertyNameID));
 
 			return data;
 		}
 
-		public override void UpdateMaterials(float value)
+		public override void UpdateMaterials(float percentage)
 		{
 			foreach (FloatMaterialBlock materialBlock in materialBlocks)
 			{
-				materialBlock.propertyBlock.SetFloat(propertyNameID, value);
+
+				float interpolatedValue = propertyFadeSettings.ease.Lerp(propertyFadeSettings.minimumValue, propertyFadeSettings.maximumValue, percentage);
+
+				materialBlock.propertyBlock.SetFloat(propertyFadeSettings.propertyNameID, interpolatedValue);
 
 				renderer.SetPropertyBlock(materialBlock.propertyBlock, materialBlock.index);
 			}
@@ -37,11 +40,11 @@ namespace Rowlan.Fader
 			/// <summary>
 			/// The initial float value of the material property
 			/// </summary>
-			public float value;
+			public float initialValue;
 
-			public FloatMaterialBlock(int index, float value) : base(index)
+			public FloatMaterialBlock(int index, float initialValue) : base(index)
 			{
-				this.value = value;
+				this.initialValue = initialValue;
 			}
 
 		}

@@ -17,27 +17,21 @@ namespace Rowlan.Fader
 	public class SingleMaterialPropertyFader : MonoBehaviour
 	{
 		#region Public Variables
-		[Header("GameObjects")]
+		
+		// [Header("GameObjects")]
 
 		public List<GameObject> sceneGameObjects = new List<GameObject>(new GameObject[1]);
 
-		[Header("Material")]
+		// [Header("Material Settings")]
 
-		public MaterialPropertyType propertyType = MaterialPropertyType.Float;
+		public FadeSettings propertyFadeSettings = new FadeSettings();
 
-		[Tooltip("The property name in the shader, e. g. _EmissionColor")]
-		public string propertyNameID;
+		[Space]
 
-		[Header( "Fade")]
-
-		public float minimumValue = 0f;
-		public float maximumValue = 1f;
+		[Header("Interpolation")]
 
 		[Tooltip("The fade duration in seconds")]
 		public float duration = 1f;
-
-		[Tooltip("The easing meachinsm")]
-		public Ease ease = Ease.Linear;
 
 		[Header("Input")]
 
@@ -55,7 +49,7 @@ namespace Rowlan.Fader
 		#region Initialization
 		void Start()
 		{
-			fader = new CustomFader(sceneGameObjects, propertyType, propertyNameID);
+			fader = new CustomFader(sceneGameObjects, propertyFadeSettings);
 		}
 		
 		#endregion Initialization
@@ -67,7 +61,7 @@ namespace Rowlan.Fader
 			{
 				if (Input.GetKeyDown(toggleKeyCode))
 				{
-					fader.Start(this, fadeDirection, duration, ease, minimumValue, maximumValue);
+					fader.Start(this, fadeDirection, duration);
 
 					// toggle fade direction
 					fadeDirection = fadeDirection == FadeDirection.In ? FadeDirection.Out : FadeDirection.In;
@@ -83,8 +77,8 @@ namespace Rowlan.Fader
 		{
 			private readonly List<BaseFadeMaterial> fadeMaterials;
 
-			public CustomFader(List<GameObject> sceneGameObjects, MaterialPropertyType propertyType, string propertyNameID) {
-				this.fadeMaterials = GetFadeMaterials(sceneGameObjects, propertyType, propertyNameID);
+			public CustomFader(List<GameObject> sceneGameObjects, FadeSettings propertyFadeSettings) {
+				this.fadeMaterials = GetFadeMaterials(sceneGameObjects, propertyFadeSettings);
 			}
 
 			/// <summary>
@@ -94,7 +88,7 @@ namespace Rowlan.Fader
 			/// <param name="propertyType"></param>
 			/// <param name="propertyNameID"></param>
 			/// <returns></returns>
-			private List<BaseFadeMaterial> GetFadeMaterials(List<GameObject> sceneGameObjects, MaterialPropertyType propertyType, string propertyNameID)
+			private List<BaseFadeMaterial> GetFadeMaterials(List<GameObject> sceneGameObjects, FadeSettings propertyFadeSettings)
 			{
 				List<BaseFadeMaterial> fadeMaterials = new List<BaseFadeMaterial>();
 
@@ -106,13 +100,13 @@ namespace Rowlan.Fader
 					{
 						BaseFadeMaterial fadeMaterial = null;
 
-						switch (propertyType)
+						switch (propertyFadeSettings.propertyType)
 						{
 							case MaterialPropertyType.Float:
-								fadeMaterial = new FloatFadeMaterial(renderer, propertyNameID);
+								fadeMaterial = new FloatFadeMaterial(renderer, propertyFadeSettings);
 								break;
 							case MaterialPropertyType.Color:
-								fadeMaterial = new ColorFadeMaterial(renderer, propertyNameID);
+								fadeMaterial = new ColorFadeMaterial(renderer, propertyFadeSettings);
 								break;
 						}
 
@@ -130,11 +124,11 @@ namespace Rowlan.Fader
 				this.fadeMaterials = fadeMaterials;
 			}
 
-			public override void ApplyFade(float value)
+			public override void ApplyFade(float percentage)
 			{
 				foreach (BaseFadeMaterial fadeMaterial in fadeMaterials)
 				{
-					fadeMaterial.UpdateMaterials(value);
+					fadeMaterial.UpdateMaterials(percentage);
 				}
 			}
 		}
