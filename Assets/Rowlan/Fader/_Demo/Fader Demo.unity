@@ -318,7 +318,7 @@ MonoBehaviour:
   sceneGameObjects:
   - {fileID: 1445958946}
   propertyFadeSettings:
-    propertyType: 1
+  - propertyType: 1
     propertyNameID: _EmissionColor
     minimumValue: 0
     maximumValue: 1
@@ -354,7 +354,7 @@ MonoBehaviour:
   sceneGameObjects:
   - {fileID: 113772296}
   propertyFadeSettings:
-    propertyType: 0
+  - propertyType: 0
     propertyNameID: _Metallic
     minimumValue: 0
     maximumValue: 1
