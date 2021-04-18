@@ -2,7 +2,7 @@
 
 ### Description
 
-Lerp between values and colors for a given duration.
+Fader allows you to lerp between values and colors for a given duration and toggle lerp direction.
 
 Specific implementations can e. g. fade Materials, Enviro Time, VFX Spawn Rate, etc in and out in Unity.
 
