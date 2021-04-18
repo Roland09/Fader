@@ -48,16 +48,8 @@ namespace Rowlan.Fader
 		#region Fade Trigger
 		void Update()
 		{
-			if (Input.anyKeyDown)
-			{
-				if (Input.GetKeyDown(toggleKeyCode))
-				{
-					fader.Start(this, fadeDirection, duration);
-
-					// toggle fade direction
-					fadeDirection = fadeDirection == FadeDirection.In ? FadeDirection.Out : FadeDirection.In;
-				}
-			}
+			// check if the toggle key got pressed and if so start the fading and toggle the fade direction afterwards
+			fader.StartToggleOnInput(toggleKeyCode, this, ref fadeDirection, duration);
 		}
 		#endregion Fade Trigger
 

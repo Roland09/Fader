@@ -28,6 +28,38 @@ namespace Rowlan.Fader
 			currentFadeCoroutine = monoBehaviour.StartCoroutine(Fade(duration, fadeDirection));
 		}
 
+		/// <summary>
+		/// Starts the fading using <see cref="Start"/> and toggled the fade direction afterwards
+		/// </summary>
+		/// <param name="monoBehaviour"></param>
+		/// <param name="fadeDirection"></param>
+		/// <param name="duration"></param>
+		public void StartToggle(MonoBehaviour monoBehaviour, ref FadeDirection fadeDirection, float duration)
+		{
+			Start(monoBehaviour, fadeDirection, duration);
+
+			// toggle fade direction
+			fadeDirection = fadeDirection == FadeDirection.In ? FadeDirection.Out : FadeDirection.In;
+		}
+
+		/// <summary>
+		/// Checks if the toggle key got pressed and if so starts the fading and toggles the fade direction afterwards
+		/// </summary>
+		/// <param name="toggleKeyCode"></param>
+		/// <param name="monoBehaviour"></param>
+		/// <param name="fadeDirection"></param>
+		/// <param name="duration"></param>
+		public void StartToggleOnInput(KeyCode toggleKeyCode, MonoBehaviour monoBehaviour, ref FadeDirection fadeDirection, float duration)
+		{
+			if (Input.anyKeyDown)
+			{
+				if (Input.GetKeyDown(toggleKeyCode))
+				{
+					StartToggle(monoBehaviour, ref fadeDirection, duration);
+				}
+			}
+		}
+
 		private IEnumerator Fade(float globalDuration, FadeDirection fadeDirection)
 		{
 
