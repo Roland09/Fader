@@ -1,0 +1,20 @@
+{
+    "name": "Fader",
+    "rootNamespace": "",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.visualeffectgraph",
+            "expression": "",
+            "define": "USING_VFX"
+        }
+    ],
+    "noEngineReferences": false
+}

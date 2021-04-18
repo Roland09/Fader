@@ -17,7 +17,7 @@ namespace Rowlan.Fader
 			Out
 		}
 
-		public enum MaterialPropertyType
+		public enum PropertyType
 		{
 			Float,
 			Color

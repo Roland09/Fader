@@ -9,11 +9,11 @@ namespace Rowlan.Fader
 	[Serializable]
     public class FadeSettings
     {
-		[Header("Material")]
+		[Header("Property")]
 
-		public MaterialPropertyType propertyType = MaterialPropertyType.Float;
+		public PropertyType propertyType = PropertyType.Float;
 
-		[Tooltip("The property name in the shader, e. g. _EmissionColor")]
+		[Tooltip("The property name which is assigned the value. Example for material shader usage: _EmissionColor")]
 		public string propertyNameID;
 
 		[Header("Fade")]

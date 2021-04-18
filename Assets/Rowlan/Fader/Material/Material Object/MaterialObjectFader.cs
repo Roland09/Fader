@@ -11,7 +11,7 @@ namespace Rowlan.Fader
 	/// https://docs.unity3d.com/ScriptReference/Material.Lerp.html
 	/// 
 	/// </summary>
-	public class MaterialFader : MonoBehaviour
+	public class MaterialObjectFader : MonoBehaviour
 	{
 		#region Public Variables
 

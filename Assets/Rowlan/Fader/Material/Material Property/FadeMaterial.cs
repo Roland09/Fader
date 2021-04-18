@@ -84,7 +84,7 @@ namespace Rowlan.Fader
 
 					switch (fadeSettings.propertyType)
 					{
-						case FadeConst.MaterialPropertyType.Float:
+						case FadeConst.PropertyType.Float:
 
 							interpolatedValue = fadeSettings.ease.Lerp(fadeSettings.minimumValue, fadeSettings.maximumValue, percentage);
 
@@ -92,7 +92,7 @@ namespace Rowlan.Fader
 
 							break;
 
-						case FadeConst.MaterialPropertyType.Color:
+						case FadeConst.PropertyType.Color:
 
 							interpolatedValue = fadeSettings.ease.Lerp(fadeSettings.minimumValue, fadeSettings.maximumValue, percentage);
 
@@ -147,11 +147,11 @@ namespace Rowlan.Fader
 
 					switch (fadeSettings.propertyType)
 					{
-						case FadeConst.MaterialPropertyType.Float:
+						case FadeConst.PropertyType.Float:
 							initialFloatMap.Add(fadeSettings.propertyNameID, material.GetFloat(fadeSettings.propertyNameID));
 							break;
 
-						case FadeConst.MaterialPropertyType.Color:
+						case FadeConst.PropertyType.Color:
 							initialColorMap.Add(fadeSettings.propertyNameID, material.GetColor(fadeSettings.propertyNameID));
 							break;
 
