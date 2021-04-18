@@ -1,10 +1,13 @@
 # Fader
 
-##### Description
+### Description
 
-General purpose fader to fade Materials, Enviro Time, VFX Spawn Rate, etc in Unity.
+Lerp between values and colors for a given duration.
 
-##### Example Implementations
+Specific implementations can e. g. fade Materials, Enviro Time, VFX Spawn Rate, etc in and out in Unity.
+
+
+### Example Implementations
 
 * Material Property
   - Fade Float and Color Properties of Materials
@@ -18,7 +21,7 @@ General purpose fader to fade Materials, Enviro Time, VFX Spawn Rate, etc in Uni
   - Fade the Aura 2 Camera and Fade the Aura 2 Volume
 
 
-##### Example Setup
+### Example Setup
 
 ![setup](https://user-images.githubusercontent.com/10963432/110688054-783fbd80-81e1-11eb-8f16-ef542a81a9d9.png)
 
