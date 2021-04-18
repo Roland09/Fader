@@ -43,7 +43,7 @@ namespace Rowlan.Fader
 		#region Internal Variables
 		private FadeDirection fadeDirection = FadeDirection.In;
 
-		private Fader fader;
+		private InputToggleFader fader;
 		#endregion Internal Variables
 
 		#region Initialization
@@ -64,7 +64,7 @@ namespace Rowlan.Fader
 
 		#region Fade Logic
 
-		public class CustomFader : Fader
+		public class CustomFader : InputToggleFader
 		{
 			private readonly List<FadeMaterial> fadeMaterials;
 
